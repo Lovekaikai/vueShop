@@ -1,6 +1,5 @@
 var path = require('path')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
-
+var htmlWebpackPlugin=require("html-webpack-plugin");
 module.exports = {
     // 入口文件
     entry: './src/main.js',
@@ -33,16 +32,6 @@ module.exports = {
                 }]
             },
             {
-                test: /\.scss$/,
-                use: [{
-                    loader: 'style-loader'
-                }, {
-                    loader: 'css-loader'
-                }, {
-                    loader: 'sass-loader'
-                }]
-            },
-            {
                 test: /\.(png|jpg|gif|eot|svg|ttf|woff)/,
                 use: [{
                     loader: 'url-loader',
@@ -57,17 +46,16 @@ module.exports = {
                 loader: 'vue-loader'
             },
             {
-                test:/\.js$/,
-                exclude:/node_modules/,
-                use:['babel-loader']
+                  test: /\.js$/, 
+                  use: 'babel-loader',
+                  exclude: /node_modules/
             }
         ]
     },
-    plugins: [
-        new HtmlWebpackPlugin({
-            template: './src/index.html',
-            filename: 'index.html',
-            title: '个人微商'
+    plugins:[
+        new htmlWebpackPlugin({
+            template:'./src/index.html',
+            filename:'index.html'
         })
     ]
 }
