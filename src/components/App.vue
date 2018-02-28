@@ -1,15 +1,21 @@
 <template>
     <div>
-        
-        {{val}}
+        <router-view></router-view>
     </div>
 </template>
 <script>
+
     export default{
       data(){
             return {
-                  val:'你好'
+                   user: {
+                    uname: "admin",
+                    upwd: "123456"
+                }
             }
+         },
+         created(){
+        
          }
     }
 </script>
