@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="app">  
         <router-view></router-view>
     </div>
 </template>
@@ -13,13 +13,13 @@
                     upwd: "123456"
                 }
             }
-         },
-         created(){
-        
          }
     }
 </script>
 <style>
+    .app{
+        height: 100%;
 
+    }
 
 </style>

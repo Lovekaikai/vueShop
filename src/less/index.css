@@ -1,0 +1,10 @@
+body,
+html {
+  height: 100%;
+}
+body a,
+html a {
+  text-decoration: none;
+  color: white;
+}
+/*# sourceMappingURL=./index.css.map */
