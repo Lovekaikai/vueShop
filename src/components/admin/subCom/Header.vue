@@ -49,7 +49,10 @@
 <style scoped lang="less">
     .header{
         padding-right: 50px;
-       
+        .admin_elft{
+            font-size: 30px;
+            color: white
+        }
         .el-icon-menu{
             text-align: left;
             cursor: pointer

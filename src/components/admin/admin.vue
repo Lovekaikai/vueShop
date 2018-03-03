@@ -62,7 +62,7 @@
   
   .el-aside {
     overflow: hidden;
-    background-color: #267cb7;
+    background-color: #545c64;
     color: #a6a9ad;
     text-align: center;
     line-height: 200px;

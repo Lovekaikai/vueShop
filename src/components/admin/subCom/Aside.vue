@@ -61,9 +61,9 @@
                     },
                     { title: '商品管理', submenu:
                         [
-                            { text: '内容管理', path: '/admin/goods/comment' },
-                            { text: '类别管理', path: '/admin/goods/list' },
-                            { text: '评论管理', path: '/admin/goods/detail' },
+                            { text: '评论管理', path: '/admin/goods/comment' },
+                            { text: '内容管理', path: '/admin/goods/list' },
+                            { text: '类别管理', path: '/admin/goods/detail' },
                         ]
                     },
                     { title: '订单管理', submenu:
