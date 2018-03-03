@@ -57,6 +57,15 @@
                     </el-table-column>
                     </el-table>
         </div>
+         <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :current-page="query.pageIndex"
+            :page-sizes="[2, 4, 6, 8]"
+            :page-size="query.pageSize"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="query.total">
+        </el-pagination>
     </div>
 </template>
 <script>
@@ -65,8 +74,9 @@ export default {
       return {
          query: {
                     pageIndex: 1,
-                    pageSize: 10,
+                    pageSize: 2,
                     searchvalue: '',
+                    total:0
         },  
         detailGoodlist:[],
         tableData3: [{
@@ -103,15 +113,22 @@ export default {
     },
 
     methods: { 
+        handleSizeChange(size){
+            this.query.pageSize=size;
+            this.getAllGoodList();
+        },
+        handleCurrentChange(currentPage){
+            this.query.pageIndex=currentPage
+            this.getAllGoodList();
+        },
         all(){
             document.querySelector(".el-checkbox__inner").click();
             },
         delGoodlist(){
                if(this.detailGoodlist.length!==0){
                      var delId=this.detailGoodlist.map(v=>v.id).join(',')
-                    this.$http.get(this.$api.gsDel+delId).then(()=>{
+                      this.$http.get(this.$api.gsDel+delId).then(()=>{
                       this.openFullScreen2();
-                  
                     })  
                 }
         
@@ -130,7 +147,7 @@ export default {
         setTimeout(() => {
           this.getAllGoodList();
           loading.close();
-           }, 2000);
+           }, 1000);
         },
         toggleSelection(rows) {
         if (rows) {
@@ -146,9 +163,10 @@ export default {
         this.detailGoodlist = val;
       },
       getAllGoodList(){
-        this.$http.get(this.$api.gsList,{ params: this.query }).then((res)=>{
+        let  {pageIndex,pageSize,searchvalue}=this.query;
+        this.$http.get(this.$api.gsList,{ params: {pageIndex,pageSize,searchvalue}}).then((res)=>{
             this.tableData3=res.data.message;
-            console.log(this.tableData3)
+            this.query.total=res.data.totalcount;
         })
       }
     },
