@@ -18,13 +18,13 @@
                 </el-input>
             </div>
          </div>   
-            <div class="table">
+            <div class="table"> 
                   <el-table ref="multipleTable"  max-height="600" :data="tableData3" tooltip-effect="dark" style="width: 100%"  @selection-change="handleSelectionChange">
-                    <el-table-column type="selection"   width="55"></el-table-column>
+                    <el-table-column ref='select' type="selection"   width="55"></el-table-column>
                     <el-table-column label="标题" width="300">
                         <template slot-scope="scope">
                                    <el-tooltip placement="right">
-                                         <router-link style="color: #666;"  :to="{ name: 'goodsDetail' }">
+                                         <router-link style="color: #666;" :to="{ name: 'goodDetail', params: { id: scope.row.id } }">
                                                {{ scope.row.title }}  
                                         </router-link> 
                                          <div slot="content">
@@ -122,6 +122,7 @@ export default {
             this.getAllGoodList();
         },
         all(){
+                // this.$refs.select.onclick()
             document.querySelector(".el-checkbox__inner").click();
             },
         delGoodlist(){
@@ -166,6 +167,7 @@ export default {
         let  {pageIndex,pageSize,searchvalue}=this.query;
         this.$http.get(this.$api.gsList,{ params: {pageIndex,pageSize,searchvalue}}).then((res)=>{
             this.tableData3=res.data.message;
+            console.log(this.tableData3)
             this.query.total=res.data.totalcount;
         })
       }

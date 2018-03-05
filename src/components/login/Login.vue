@@ -46,7 +46,8 @@
                   this.$alert("登陆成功","title",{
                       callback:()=>{
                           localStorage.setItem("username",res.data.message.uname)
-                          this.$router.push({name:'admin'})
+                        let  Fullpath=this.$route.query.next|| '/admin'
+                          this.$router.push({path:Fullpath})
                       }
                   });
               })

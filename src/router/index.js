@@ -18,7 +18,7 @@ const goods=[
 Vue.use(VueRouter);
 
 
-export default new VueRouter({
+let router= new VueRouter({
     routes:[
         {
             path:'/',redirect: "/login"
@@ -32,3 +32,29 @@ export default new VueRouter({
         }
     ]    
 })
+
+
+router.beforeEach((to, from, next) => {
+
+           Vue.prototype.$http.get(Vue.prototype.$api.islogin).then(res => {
+                   let isLogin = false;
+                       if (res.data.code == 'logined') {
+                               isLogin = true;
+                           }
+                       if (to.name == 'login') {
+                               if (isLogin) {
+                                       next({ name: 'admin'});
+                                   } else {
+                                       next();
+                                   }
+                           }
+                       if (to.name != 'login') {
+                               if (isLogin) {
+                                       next();
+                                   } else {
+                                       next({ name: 'login',query:{next:to.fullPath} });
+                                   }
+                           }
+               })
+       }); 
+export default router;
